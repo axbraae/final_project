@@ -1,0 +1,109 @@
+---
+title: "Project Plan"
+author: "Anne Braae"
+date: "12/09/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Flight delays
+
+## Context
+
+#### Business intelligence and data-driven decision making
+
+What insights can the business/organisation gain from your analysis and how will your analysis help the business/organisation make better decisions? 
+
+* insights - data-driven exploratory analysis to provide insight on the impact of weather on flight delay.
+Also consideration will be given to other factors such as airline carrier, frequency of flights and arrival and departure airport.
+
+* better decisions - the report will allow Newark airport to determine if it is worth investing in improving facilities to allow aircraft to take off in all types of weather. OR whether there might be other areas which would benefit from investment which could also reduce flight delays.
+
+#### Domain knowledge and the business context
+
+Briefly describe the business/organisation and where your analysis fits within its aims/activity.
+
+Newark Airport
+
+## Data
+
+#### Internal and external data sources
+
+Briefly describe your data sources and which were internal (provided by the organisation) and external (not sourced from the organisation's data)
+
+#### Types of data
+
+What kind of data did you work with? E.g. categorical and numerical data and their sub-types.
+
+#### Data formats
+
+What format did your data come in? E.g. all downloaded flat files (CSV) or any data from APIs, scraping etc.
+
+#### Data quality and bias
+
+Briefly describe the quality of the data and whether you have any reasons to suggest the data is biased e.g. only data from a specific demographic even though a broader demographic would be of interest to the organisation.
+
+## Ethics
+
+#### Ethical issues in data sourcing and extraction
+
+Do you have any ethical concerns regarding the sourcing and extraction of your data? 
+
+#### Ethical implications of business requirements
+
+Are there any ethical implications of the business requirements?
+
+## Analysis
+
+#### Stages in the data analysis process
+
+What were the main stages in your data analysis process?
+
+#### Tools for data analysis
+
+What were the main tools you used for your analysis?
+
+#### Descriptive, diagnostic, predictive and prescriptive analysis
+
+Please report under which of the below categories your analysis falls **and why** (can be more than one) 
+
+::: {.emphasis}
+**Descriptive Analytics** tells you what happened in the past.
+
+**Diagnostic Analytics** helps you understand why something happened in the past.
+
+**Predictive Analytics** predicts what is most likely to happen in the future.
+
+**Prescriptive Analytics** recommends actions you can take to affect those outcomes.
+:::
+
+
+# PDA Outcomes
+
+### Working with Data (J4Y6 35)
+
+#### 1. Plan an analysis to provide business intelligence
+
+-   1.1 Business intelligence and data-driven decision making
+-   1.2 Domain knowledge and the business context
+-   1.4 Internal and external data sources
+-   1.5 Data quality
+-   1.6 Stages in the data analysis process
+-   1.7 Descriptive, diagnostic, predictive and prescriptive analysis
+-   1.9 Ethical implications of business requirements
+-   1.10 Tools for data analysis
+
+#### 2. Extract data from a variety of sources
+
+-   2.1 Tools for querying data sources
+-   2.2 Types of data (categorical and numerical data and their sub-types)
+-   2.3 Data formats
+-   2.6 Data quality including data bias
+-   2.7 Ethical issues in data sourcing and extraction
+
+#### 4. Analyse data to provide business intelligence
+
+-   4.7 Role of domain knowledge in interpreting analyses
