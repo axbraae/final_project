@@ -155,3 +155,5 @@ vignettes/*.pdf
 rsconnect/
 
 .DStore
+
+*.excalidraw
