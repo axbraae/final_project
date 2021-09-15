@@ -74,13 +74,6 @@ weather_merge = pd.merge(
     how = 'left')
 
 # impute missing values in weather
-
-# track which values were missing
-weather_merge.loc[:, 'visib_missing'] = weather_merge.visib.isna()
-weather_merge.loc[:, 'wind_dir_missing'] = weather_merge.wind_dir.isna()
-weather_merge.loc[:, 'wind_speed_missing'] = weather_merge.wind_speed.isna()
-weather_merge.loc[:, 'wind_gust_missing'] = weather_merge.wind_gust.isna()
-
 # fill with median or mean depending on distribution of the original data
 weather_merge.fillna({'visib': np.round(
     weather_merge.groupby('join_id').visib.transform('median'), 2)}, inplace = True)
@@ -146,6 +139,9 @@ flights_weather = pd.merge(left = flights_clean, right = weather_clean,\
 
 # drop rows from the day with the missing weather (dec 31st)
 flights_weather.dropna(inplace = True)
+flights_weather.drop(
+    columns = ['join_id', 'date', 'year'], inplace = True
+)
 
 # flights, weather and airports
 
