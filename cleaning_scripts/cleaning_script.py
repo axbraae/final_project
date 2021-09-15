@@ -11,7 +11,7 @@ import pytz
 
 flights = pd.read_csv("../data/raw_data/flights.csv")
 
-flights_clean = flights.copy()
+flights_clean = flights.sort_values(by = ['time_hour'])
 flights_clean.dropna(inplace = True)
 
 # import airports data --------------------------------------------
@@ -105,7 +105,6 @@ weather_clean.drop(columns = [
 # import planes data ---------------------------------------------------
 
 planes = pd.read_csv('../data/raw_data/planes.csv')
-
 planes_clean = planes.drop(columns = ['speed', 'type'])
 
 # import airlines data -------------------------------------------------
@@ -116,6 +115,7 @@ airlines = pd.read_csv('../data/raw_data/airlines.csv')
 # joining datasets ------------------------------------------------------
 
 # flights and airports
+
 # add ori_ and dest_ prefix to airports before joining
 airports_clean_ori = airports_clean.add_prefix('ori_').copy()
 airports_clean_dest = airports_clean.add_prefix('dest_').copy()
@@ -135,9 +135,10 @@ flights_airports = pd.merge(
     right_on = ['dest_faa'], 
     how = 'left')
 
+# flights and airports and weather
+
 # time_hour in flights and weather does not make sense
 # make a new column for joining based on month, day, hour and origin
-
 flights_airports['join_id'] = flights_airports['month'].astype(str) +\
       '-' + flights_airports['day'].astype(str) +\
      '-' + flights_airports['hour'].astype(str) +\
@@ -147,3 +148,12 @@ weather_clean['join_id'] = weather_clean['month'].astype(str) +\
      '-' + weather_clean['day'].astype(str) +\
      '-' + weather_clean['hour'].astype(str) +\
      '-' + weather_clean['origin']
+
+# drop duplicated columns
+weather_clean.drop(
+    columns = ['month', 'day', 'hour', 'origin', 'time_hour'], inplace = True
+    )
+
+# make flights_airports_weather
+flights_airports_weather = pd.merge(left = flights_airports, right = weather_clean,\
+     left_on = ['join_id'], right_on = ['join_id'], how = 'left')
