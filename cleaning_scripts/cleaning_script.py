@@ -24,8 +24,11 @@ tf_func = tf.timezone_at
 airports['timezone'] = airports.apply(
     lambda row: tf_func(lng=row['lon'], lat=row['lat']), axis=1)
 
+
 airports_clean = airports.drop(
-    columns = ['tz', 'dst', 'tzone']).copy()
+    columns = ['tz', 'dst', 'tzone'])
+
+airports_clean.rename(columns={'name':'airport'}, inplace=True)
 
 # set timezone to datetime object
 airports_clean['timezone'] = airports_clean.apply(
@@ -157,3 +160,13 @@ weather_clean.drop(
 # make flights_airports_weather
 flights_airports_weather = pd.merge(left = flights_airports, right = weather_clean,\
      left_on = ['join_id'], right_on = ['join_id'], how = 'left')
+
+
+# make flights_airports_weather_airlines
+flights_airports_weather_airlines = pd.merge(left = flights_airports_weather, right = airlines,\
+     left_on = ['carrier'], right_on = ['carrier'], how = 'left')
+
+
+# make flights_airports_weather_airlines_planes
+flights_airports_weather_airlines_planes = pd.merge(left = flights_airports_weather_airlines, right = planes,\
+     left_on = ['tailnum'], right_on = ['tailnum'], how = 'left')
