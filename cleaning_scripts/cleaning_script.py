@@ -1,0 +1,149 @@
+# cleaning script for flight delay data
+# abraae sept 2021
+
+# load libraries --------------------------------------------------
+import pandas as pd
+import numpy as np
+from timezonefinder import TimezoneFinder
+import pytz
+
+# import flights data ----------------------------------------------
+
+flights = pd.read_csv("../data/raw_data/flights.csv")
+
+flights_clean = flights.copy()
+flights_clean.dropna(inplace = True)
+
+# import airports data --------------------------------------------
+airports = pd.read_csv("../data/raw_data/airports.csv")
+
+# add missing timezones to airports data
+tf = TimezoneFinder()
+tf_func = tf.timezone_at
+
+airports['timezone'] = airports.apply(
+    lambda row: tf_func(lng=row['lon'], lat=row['lat']), axis=1)
+
+airports_clean = airports.drop(
+    columns = ['tz', 'dst', 'tzone']).copy()
+
+# set timezone to datetime object
+airports_clean['timezone'] = airports_clean.apply(
+    lambda row: pytz.timezone(row['timezone']), axis=1)
+
+# import weather data --------------------------------------------
+weather = pd.read_csv('../data/raw_data/weather.csv')
+
+# import additional weather data 
+extra_weather = pd.read_csv('../data/raw_data/extra_weather.csv')
+extra_weather.drop(columns = ['hdd', 'ccd'], inplace = True)
+
+extra_weather.rename(columns = {'airport':'origin'}, inplace = True)
+
+# change T (trace) to 0.01 in ppt, new_snow and snow_depth columns
+extra_weather = extra_weather.replace({
+    'ppt' : {'T':0.01},
+    'new_snow' : {'T':0.01},
+    'snow_depth' : {'T':0.01}})
+
+# make joining id column for joining to weather data
+extra_weather['join_id'] = extra_weather['date'] + '-' + extra_weather['origin']
+extra_weather.drop(columns = ['date', 'origin'], inplace = True)
+
+# format day and month in weather data for joining id column
+weather['day_str'] = weather['day'].astype(str).str.zfill(2)
+weather['month_str'] = weather['month'].astype(str).str.zfill(2)
+
+weather['date'] = weather['year'].astype(str) +\
+ '-' + weather['month_str'] + '-' + weather['day_str']
+
+weather['join_id'] = weather['date'] + '-' + weather['origin']
+weather.drop(columns = ['day_str', 'month_str'], inplace = True)
+
+# note: weather is missing all data for dec 31st
+
+weather_merge = pd.merge(
+    left = weather, 
+    right = extra_weather, 
+    left_on = ['join_id'], 
+    right_on = ['join_id'], 
+    how = 'left')
+
+# impute missing values in weather
+
+# track which values were missing
+weather_merge.loc[:, 'visib_missing'] = weather_merge.visib.isna()
+weather_merge.loc[:, 'wind_dir_missing'] = weather_merge.wind_dir.isna()
+weather_merge.loc[:, 'wind_speed_missing'] = weather_merge.wind_speed.isna()
+weather_merge.loc[:, 'wind_gust_missing'] = weather_merge.wind_gust.isna()
+
+# fill with median or mean depending on distribution of the original data
+weather_merge.fillna({'visib': np.round(
+    weather_merge.groupby('join_id').visib.transform('median'), 2)}, inplace = True)
+
+weather_merge.fillna({'wind_dir': np.round(
+    weather_merge.groupby('join_id').wind_dir.transform('median'), 2)}, inplace = True)
+
+weather_merge.fillna({'wind_speed': np.round(
+    weather_merge.groupby('join_id').wind_speed.transform('mean'), 2)}, inplace = True)
+
+weather_merge.fillna({'wind_gust': np.round(
+    weather_merge.groupby('join_id').wind_gust.transform('mean'), 2)}, inplace = True)
+
+# remove columns not needed
+weather_clean = weather_merge.copy()
+weather_clean.drop(columns = [
+    'temp', 
+    'dewp', 
+    'humid', 
+    'precip', 
+    'pressure', 
+    'year', 
+    'join_id'], 
+    inplace = True)
+
+# import planes data ---------------------------------------------------
+
+planes = pd.read_csv('../data/raw_data/planes.csv')
+
+planes_clean = planes.drop(columns = ['speed', 'type'])
+
+# import airlines data -------------------------------------------------
+
+airlines = pd.read_csv('../data/raw_data/airlines.csv')
+
+
+# joining datasets ------------------------------------------------------
+
+# flights and airports
+# add ori_ and dest_ prefix to airports before joining
+airports_clean_ori = airports_clean.add_prefix('ori_').copy()
+airports_clean_dest = airports_clean.add_prefix('dest_').copy()
+
+flights_airports = pd.merge(
+    left = flights_clean, 
+    right = airports_clean_ori, 
+    left_on = ['origin'], 
+    right_on = ['ori_faa'], 
+    how = 'left')
+
+
+flights_airports = pd.merge(
+    left = flights_airports, 
+    right = airports_clean_dest, 
+    left_on = ['dest'], 
+    right_on = ['dest_faa'], 
+    how = 'left')
+
+# time_hour in flights and weather does not make sense
+# make a new column for joining based on month, day, hour and origin
+
+flights_airports['join_id'] = flights_airports['month'].astype(str) +\
+      '-' + flights_airports['day'].astype(str) +\
+     '-' + flights_airports['hour'].astype(str) +\
+     '-' + flights_airports['origin']
+
+weather_clean['join_id'] = weather_clean['month'].astype(str) +\
+     '-' + weather_clean['day'].astype(str) +\
+     '-' + weather_clean['hour'].astype(str) +\
+     '-' + weather_clean['origin']
