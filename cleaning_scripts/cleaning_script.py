@@ -9,9 +9,10 @@ import pytz
 
 # import flights data ----------------------------------------------
 
-flights = pd.read_csv("../data/raw_data/flights.csv")
+flights = pd.read_csv('../data/raw_data/flights.csv')
 
 flights_clean = flights.sort_values(by = ['time_hour'])
+flights_clean['dep_delay_true'] = flights_clean['dep_delay'] > 15
 flights_clean.dropna(inplace = True)
 
 # import airports data --------------------------------------------
@@ -109,45 +110,25 @@ weather_clean.drop(columns = [
 
 planes = pd.read_csv('../data/raw_data/planes.csv')
 planes_clean = planes.drop(
-    columns = ['speed', 'seats', 'year']
+    columns = ['speed', 'seats', 'year', 'engines']
     )
 
 # import airlines data -------------------------------------------------
 
 airlines = pd.read_csv('../data/raw_data/airlines.csv')
+airlines_clean = airlines.rename(columns={'name':'carrier_name'})
 
 
 # joining datasets ------------------------------------------------------
 
-# flights and airports
-
-# add ori_ and dest_ prefix to airports before joining
-airports_clean_ori = airports_clean.add_prefix('ori_').copy()
-airports_clean_dest = airports_clean.add_prefix('dest_').copy()
-
-flights_airports = pd.merge(
-    left = flights_clean, 
-    right = airports_clean_ori, 
-    left_on = ['origin'], 
-    right_on = ['ori_faa'], 
-    how = 'left')
-
-
-flights_airports = pd.merge(
-    left = flights_airports, 
-    right = airports_clean_dest, 
-    left_on = ['dest'], 
-    right_on = ['dest_faa'], 
-    how = 'left')
-
-# flights and airports and weather
+# flights and weather
 
 # time_hour in flights and weather does not make sense
 # make a new column for joining based on month, day, hour and origin
-flights_airports['join_id'] = flights_airports['month'].astype(str) +\
-      '-' + flights_airports['day'].astype(str) +\
-     '-' + flights_airports['hour'].astype(str) +\
-     '-' + flights_airports['origin']
+flights_clean['join_id'] = flights_clean['month'].astype(str) +\
+      '-' + flights_clean['day'].astype(str) +\
+     '-' + flights_clean['hour'].astype(str) +\
+     '-' + flights_clean['origin']
 
 weather_clean['join_id'] = weather_clean['month'].astype(str) +\
      '-' + weather_clean['day'].astype(str) +\
@@ -160,15 +141,54 @@ weather_clean.drop(
     )
 
 # make flights_airports_weather
-flights_airports_weather = pd.merge(left = flights_airports, right = weather_clean,\
+flights_weather = pd.merge(left = flights_clean, right = weather_clean,\
      left_on = ['join_id'], right_on = ['join_id'], how = 'left')
 
+# drop rows from the day with the missing weather (dec 31st)
+flights_weather.dropna(inplace = True)
+
+# flights, weather and airports
+
+# add ori_ and dest_ prefix to airports before joining
+airports_clean_ori = airports_clean.add_prefix('ori_').copy()
+airports_clean_dest = airports_clean.add_prefix('dest_').copy()
+
+flights_airports_ori = pd.merge(
+    left = flights_weather, 
+    right = airports_clean_ori, 
+    left_on = ['origin'], 
+    right_on = ['ori_faa'], 
+    how = 'left')
+
+
+flights_airports_weather = pd.merge(
+    left = flights_airports_ori, 
+    right = airports_clean_dest, 
+    left_on = ['dest'], 
+    right_on = ['dest_faa'], 
+    how = 'left')
 
 # make flights_airports_weather_airlines
-flights_airports_weather_airlines = pd.merge(left = flights_airports_weather, right = airlines,\
+flights_airports_weather_airlines = pd.merge(left = flights_airports_weather, right = airlines_clean,\
      left_on = ['carrier'], right_on = ['carrier'], how = 'left')
 
 
 # make flights_airports_weather_airlines_planes
-flights_airports_weather_airlines_planes = pd.merge(left = flights_airports_weather_airlines, right = planes,\
+flights_airports_weather_airlines_planes = pd.merge(left = flights_airports_weather_airlines, right = planes_clean,\
      left_on = ['tailnum'], right_on = ['tailnum'], how = 'left')
+
+# replace NaNs in plane data
+na_replace = {
+       'type': 'Unknown',
+       'manufacturer': 'Unknown', 
+       'model': 'Unknown', 
+       'engine': 'Unknown'}
+
+flights_airports_weather_airlines_planes.fillna(value=na_replace, inplace=True)
+
+
+# write clean data
+# note NaNs present in destination airport geospatial info
+
+flights_airports_weather_airlines_planes.to_csv(path_or_buf='../data/clean_data/flights_data.csv')
+
