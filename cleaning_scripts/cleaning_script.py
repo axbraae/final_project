@@ -108,7 +108,9 @@ weather_clean.drop(columns = [
 # import planes data ---------------------------------------------------
 
 planes = pd.read_csv('../data/raw_data/planes.csv')
-planes_clean = planes.drop(columns = ['speed', 'type'])
+planes_clean = planes.drop(
+    columns = ['speed', 'seats', 'year']
+    )
 
 # import airlines data -------------------------------------------------
 
