@@ -139,9 +139,7 @@ flights_weather = pd.merge(left = flights_clean, right = weather_clean,\
 
 # drop rows from the day with the missing weather (dec 31st)
 flights_weather.dropna(inplace = True)
-flights_weather.drop(
-    columns = ['join_id', 'date', 'year'], inplace = True
-)
+flights_weather.drop(columns = ['join_id', 'date', 'year'], inplace = True)
 
 # flights, weather and airports
 
@@ -186,5 +184,4 @@ flights_airports_weather_airlines_planes.fillna(value=na_replace, inplace=True)
 # write clean data
 # note NaNs present in destination airport geospatial info
 
-flights_airports_weather_airlines_planes.to_csv(path_or_buf='../data/clean_data/flights_data.csv')
-
+flights_airports_weather_airlines_planes.to_csv(path_or_buf='../data/clean_data/flights_data.csv', index=False)
