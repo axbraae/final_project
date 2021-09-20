@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 What insights can the business/organisation gain from your analysis and how will your analysis help the business/organisation make better decisions? 
 
 * insights - data-driven exploratory analysis to provide insight on the impact of weather on flight delay.
-Also consideration will be given to other factors such as airline carrier, frequency of flights and arrival and departure airport.
+Also consideration will be given to other factors such as airline carrier, frequency of flights and departure airport.
 
 * better decisions - the report will allow Newark airport to determine if it is worth investing in improving facilities to allow aircraft to take off in all types of weather. OR whether there might be other areas which would benefit from investment which could also reduce flight delays.
 
@@ -26,7 +26,21 @@ Also consideration will be given to other factors such as airline carrier, frequ
 
 Briefly describe the business/organisation and where your analysis fits within its aims/activity.
 
-Newark Airport
+One of the three major airports in the New York metropolitan area, Newark Airport (or Newark Liberty International Airport) was the sixth busiest international airport in the United States in 2017. It only has three runways and one helipad.
+
+Along with the other two major New York airports, John F. Kennedy International Airport and LaGardia Airport, Newark Airport is owned by the Port Authority of New York and New Jersey. The Port Authority owns 5 airports in total.
+
+Recently, $2.7 billion was invested to build a new Terminal One to replace Terminal A at Newark Airport. Other parts of the redevelopment program are focused on increasing airfield paving, redesigning roadways and improving parking.
+
+Analysis fits in with the business aim for???
+
+Business context:
+Reducing flight delays is important to ensure a high quality of service for the airport.
+
+
+sources: 
+[Bureau of Transportation Statistics (BTC)](https://www.bts.gov/topics/airlines-and-airports/understanding-reporting-causes-flight-delays-and-cancellations)
+[Port Authority](https://www.panynj.gov/airports/en/index.html)
 
 ## Data
 
