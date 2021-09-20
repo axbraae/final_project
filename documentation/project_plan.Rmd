@@ -22,6 +22,8 @@ Also consideration will be given to other factors such as airline carrier, frequ
 
 * better decisions - the report will allow Newark airport to determine if it is worth investing in improving facilities to allow aircraft to take off in all types of weather. OR whether there might be other areas which would benefit from investment which could also reduce flight delays.
 
+The Bureau of Transportation Statistics (BTS) classes a flight as delayed if it is later than 15 minutes (or more) from its scheduled time.
+
 #### Domain knowledge and the business context
 
 Briefly describe the business/organisation and where your analysis fits within its aims/activity.
@@ -35,8 +37,11 @@ Recently, $2.7 billion was invested to build a new Terminal One to replace Termi
 Analysis fits in with the business aim for???
 
 Business context:
-Reducing flight delays is important to ensure a high quality of service for the airport.
+Reducing flight delays is important to ensure a high quality of service for the airport. knowing what the primary cause for delays is can advice the airport authority as to what measures it needs to invest most in. Improving infrastructure or improving facilities to deal with poor weather conditions.
 
+An American study estimated that delayed flights has cost the US economy a total of nearly 33 billion dollars (REF = Ball et al).
+
+Total of delayed flights due to extreme weather may appear small at first glance, however results in delay of other types... (((check BTS website on delays)))
 
 sources: 
 [Bureau of Transportation Statistics (BTC)](https://www.bts.gov/topics/airlines-and-airports/understanding-reporting-causes-flight-delays-and-cancellations)
