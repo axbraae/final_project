@@ -22,13 +22,13 @@ Also consideration will be given to other factors such as airline carrier, frequ
 
 * better decisions - the report will allow Newark airport to determine if it is worth investing in improving facilities to allow aircraft to take off in all types of weather. OR whether there might be other areas which would benefit from investment which could also reduce flight delays.
 
-The Bureau of Transportation Statistics (BTS) classes a flight as delayed if it is later than 15 minutes (or more) from its scheduled time.
+The Bureau of Transportation Statistics (BTS) counts flights as delayed if they depart 15 minutes or later than their scheduled time.
 
 #### Domain knowledge and the business context
 
 Briefly describe the business/organisation and where your analysis fits within its aims/activity.
 
-One of the three major airports in the New York metropolitan area, Newark Airport (or Newark Liberty International Airport) was the sixth busiest international airport in the United States in 2017. It only has three runways and one helipad.
+Newark Airport (or Newark Liberty International Airport) is one of the three major airports in the New York metropolitan area. 
 
 Along with the other two major New York airports, John F. Kennedy International Airport and LaGardia Airport, Newark Airport is owned by the Port Authority of New York and New Jersey. The Port Authority owns 5 airports in total.
 
@@ -39,12 +39,15 @@ Analysis fits in with the business aim for???
 Business context:
 Reducing flight delays is important to ensure a high quality of service for the airport. knowing what the primary cause for delays is can advice the airport authority as to what measures it needs to invest most in. Improving infrastructure or improving facilities to deal with poor weather conditions.
 
-An American study estimated that delayed flights has cost the US economy a total of nearly 33 billion dollars (REF = Ball et al).
+An American study on 2007 flight data estimated that delayed flights has cost the US economy a total of nearly 33 billion dollars.
 
-Total of delayed flights due to extreme weather may appear small at first glance, however results in delay of other types... (((check BTS website on delays)))
+Flights may be delayed due to reasons within the air carrier's control such as maintenance or issues with staffing or crew or for reasons outside the air carrier's control such as extreme weather delay, national aviation system delay. Over a third of the main cost of delay is fuel costs. With the aviation industry focusing on improving sustainability reducing unnecessary fuel use is paramount.
+
+Optimizing processes and efficiently using resources are key to reducing flight delays and airlines and airports are using data analytics to improve on-time performance.
 
 sources: 
 [Bureau of Transportation Statistics (BTC)](https://www.bts.gov/topics/airlines-and-airports/understanding-reporting-causes-flight-delays-and-cancellations)
+[](https://centreforaviation.com/analysis/reports/the-cost-of-delays-late-flights-cost-us-economy-usd33-billion-39215)
 [Port Authority](https://www.panynj.gov/airports/en/index.html)
 
 ## Data
