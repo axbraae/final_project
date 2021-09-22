@@ -160,3 +160,4 @@ rsconnect/
 data/clean_data/flights_data.csv
 data/clean_data/flights_no_planes_data.csv
 .vscode/launch.json
+*.png
