@@ -184,11 +184,11 @@ flights_airports_weather_airlines_planes.fillna(value=na_replace, inplace=True)
 # note NaNs present in destination airport geospatial info
 
 ewr_flights = flights_airports_weather_airlines_planes.loc[
-    (flights_all['origin'] == 'EWR')].copy().reset_index(drop=True)
+    (flights_airports_weather_airlines_planes['origin'] == 'EWR')].copy().reset_index(drop=True)
 jfk_flights = flights_airports_weather_airlines_planes.loc[
-    (flights_all['origin'] == 'JFK')].copy().reset_index(drop=True)
+    (flights_airports_weather_airlines_planes['origin'] == 'JFK')].copy().reset_index(drop=True)
 lga_flights = flights_airports_weather_airlines_planes.loc[
-    (flights_all['origin'] == 'LGA')].copy().reset_index(drop=True)
+    (flights_airports_weather_airlines_planes['origin'] == 'LGA')].copy().reset_index(drop=True)
 
 ewr_flights.to_csv(path_or_buf='../data/clean_data/ewr_flights.csv', index=False)
 jfk_flights.to_csv(path_or_buf='../data/clean_data/jfk_flights.csv', index=False)
