@@ -56,6 +56,17 @@ sources:
 
 Briefly describe your data sources and which were internal (provided by the organisation) and external (not sourced from the organisation's data)
 
+* Internal data sources:
+ - Internal data from several CSV files. Details below: <br />
+ 
+ | Filename       | Description                                                                                                                                                        |
+|----------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `flights.csv`  | Information on all flights per day for Newark, John F. Kennedy and LaGuardia airports. <br>Includes departure and arrival times, delay times, destination airports |
+| `airports.csv` | Information on airports in the flights data including names, geocoordinates, altitude, <br>timezone, daylight savings.                                             |
+| `airlines.csv` | Information on airline carrier code and airline carrier full name.                                                                                                 |
+| `planes.csv`   | Information on planes in the flights data including year of make, type, model and cruising speed.                                                                  |
+| `weather.csv`  | Information on weather for the three New York airports including temperature, wind measurements, <br>precipitation, visibility and time of the recording per hour. |
+
 #### Types of data
 
 What kind of data did you work with? E.g. categorical and numerical data and their sub-types.
