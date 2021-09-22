@@ -180,8 +180,16 @@ na_replace = {
 
 flights_airports_weather_airlines_planes.fillna(value=na_replace, inplace=True)
 
-
-# write clean data
+# split data per origin airport for saving
 # note NaNs present in destination airport geospatial info
 
-flights_airports_weather_airlines_planes.to_csv(path_or_buf='../data/clean_data/flights_data.csv', index=False)
+ewr_flights = flights_airports_weather_airlines_planes.loc[
+    (flights_all['origin'] == 'EWR')].copy().reset_index(drop=True)
+jfk_flights = flights_airports_weather_airlines_planes.loc[
+    (flights_all['origin'] == 'JFK')].copy().reset_index(drop=True)
+lga_flights = flights_airports_weather_airlines_planes.loc[
+    (flights_all['origin'] == 'LGA')].copy().reset_index(drop=True)
+
+ewr_flights.to_csv(path_or_buf='../data/clean_data/ewr_flights.csv', index=False)
+jfk_flights.to_csv(path_or_buf='../data/clean_data/jfk_flights.csv', index=False)
+lga_flights.to_csv(path_or_buf='../data/clean_data/lga_flights.csv', index=False)
