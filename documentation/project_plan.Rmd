@@ -67,6 +67,10 @@ Briefly describe your data sources and which were internal (provided by the orga
 | `planes.csv`   | Information on planes in the flights data including year of make, type, model and cruising speed.                                                                  |
 | `weather.csv`  | Information on weather for the three New York airports including temperature, wind measurements, <br>precipitation, visibility and time of the recording per hour. |
 
+* External data sources:
+- Additional weather data was sourced from https://www.ncei.noaa.gov/data/global-hourly/archive/csv/2017.tar.gz
+This data included measurements per day for temperature, precipitation, wind
+
 #### Types of data
 
 What kind of data did you work with? E.g. categorical and numerical data and their sub-types.
