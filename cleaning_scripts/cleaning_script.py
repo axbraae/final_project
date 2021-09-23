@@ -185,8 +185,10 @@ flights_airports_weather_airlines_planes.fillna(value=na_replace, inplace=True)
 
 ewr_flights = flights_airports_weather_airlines_planes.loc[
     (flights_airports_weather_airlines_planes['origin'] == 'EWR')].copy().reset_index(drop=True)
+
 jfk_flights = flights_airports_weather_airlines_planes.loc[
     (flights_airports_weather_airlines_planes['origin'] == 'JFK')].copy().reset_index(drop=True)
+    
 lga_flights = flights_airports_weather_airlines_planes.loc[
     (flights_airports_weather_airlines_planes['origin'] == 'LGA')].copy().reset_index(drop=True)
 
