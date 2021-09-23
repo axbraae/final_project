@@ -17,12 +17,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 What insights can the business/organisation gain from your analysis and how will your analysis help the business/organisation make better decisions? 
 
-* insights - data-driven exploratory analysis to provide insight on the impact of weather on flight delay.
-Also consideration will be given to other factors such as airline carrier, frequency of flights and departure airport.
+This is a data-driven exploratory analysis to provide insight on the impact of weather on flight delay. Consideration will also be given to other factors such as time of flight, airline carrier, frequency of flights and departure airport.
 
-* better decisions - the report will allow Newark airport to determine if it is worth investing in improving facilities to allow aircraft to take off in all types of weather. OR whether there might be other areas which would benefit from investment which could also reduce flight delays.
-
-The Bureau of Transportation Statistics (BTS) counts flights as delayed if they depart 15 minutes or later than their scheduled time.
+The report will allow Newark airport to decide if it is worth investing in improving facilities to allow aircraft to take off in the types of weather which are most affecting departure delays. By considering other factors, the report will also show if there might be other areas which would benefit from investment which could also reduce flight delays.
 
 #### Domain knowledge and the business context
 
@@ -34,10 +31,7 @@ Along with the other two major New York airports, John F. Kennedy International 
 
 Recently, $2.7 billion was invested to build a new Terminal One to replace Terminal A at Newark Airport. Other parts of the redevelopment program are focused on increasing airfield paving, redesigning roadways and improving parking.
 
-Analysis fits in with the business aim for???
-
-Business context:
-Reducing flight delays is important to ensure a high quality of service for the airport. knowing what the primary cause for delays is can advice the airport authority as to what measures it needs to invest most in. Improving infrastructure or improving facilities to deal with poor weather conditions.
+Reducing flight delays is important to ensure a high quality of service for the airport. The Bureau of Transportation Statistics (BTS) counts flights as delayed if they depart 15 minutes or later than their scheduled time. For the airport, knowing what the primary cause for delays is can advise the airport authority as to what measures it needs to invest most in. Improving infrastructure or improving facilities to deal with poor weather conditions.
 
 An American study on 2007 flight data estimated that delayed flights has cost the US economy a total of nearly 33 billion dollars.
 
@@ -54,9 +48,7 @@ sources:
 
 #### Internal and external data sources
 
-Briefly describe your data sources and which were internal (provided by the organisation) and external (not sourced from the organisation's data)
-
-* Internal data sources:
+* Internal data sources (provided by Newark Airport):
  - Internal data from several CSV files. Details below: <br />
  
  | Filename       | Description                                                                                                                                                        |
@@ -68,12 +60,18 @@ Briefly describe your data sources and which were internal (provided by the orga
 | `weather.csv`  | Information on weather for the three New York airports including temperature, wind measurements, <br>precipitation, visibility and time of the recording per hour. |
 
 * External data sources:
-- Additional weather data was sourced from https://www.ncei.noaa.gov/data/global-hourly/archive/csv/2017.tar.gz
-This data included measurements per day for temperature, precipitation, wind
+- Additional weather data was sourced from [The National Centers for Environmental Information](https://www.ncei.noaa.gov/data/global-hourly/archive/csv/). This was also in csv format.
+This data included measurements per day for temperature, precipitation, wind and snow.
 
 #### Types of data
 
-What kind of data did you work with? E.g. categorical and numerical data and their sub-types.
+The data consists of categorical (ordinal), categorical (nominal), numeric (continuous), numeric (discrete) and datetime variables. Examples of each are as follows:
+
+categorical (ordinal) - `year`, `month`, `weekday`
+categorical (nominal) - `dest_airport`, `engine` (type of engine)
+numeric (continuous) - `wind_speed`, `temperature`
+numeric (discrete) - `seats`, `engines` (number of engines)
+
 
 #### Data formats
 
