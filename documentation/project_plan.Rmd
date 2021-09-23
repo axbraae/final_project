@@ -2,7 +2,9 @@
 title: "Project Plan"
 author: "Anne Braae"
 date: "12/09/2021"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -15,34 +17,30 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #### Business intelligence and data-driven decision making
 
-What insights can the business/organisation gain from your analysis and how will your analysis help the business/organisation make better decisions? 
-
 This is a data-driven exploratory analysis to provide insight on the impact of weather on flight delay. Consideration will also be given to other factors such as time of flight, airline carrier, frequency of flights and departure airport.
 
 The report will allow Newark airport to decide if it is worth investing in improving facilities to allow aircraft to take off in the types of weather which are most affecting departure delays. By considering other factors, the report will also show if there might be other areas which would benefit from investment which could also reduce flight delays.
 
+<br />
+
 #### Domain knowledge and the business context
 
-Briefly describe the business/organisation and where your analysis fits within its aims/activity.
-
-Newark Airport (or Newark Liberty International Airport) is one of the three major airports in the New York metropolitan area. 
-
-Along with the other two major New York airports, John F. Kennedy International Airport and LaGardia Airport, Newark Airport is owned by the Port Authority of New York and New Jersey. The Port Authority owns 5 airports in total.
+Newark Airport (or Newark Liberty International Airport) is one of the three major airports in the New York metropolitan area. Along with the other two major New York airports, John F. Kennedy International Airport and LaGardia Airport, Newark Airport is owned by the Port Authority of New York and New Jersey. The Port Authority owns 5 airports in total.
 
 Recently, $2.7 billion was invested to build a new Terminal One to replace Terminal A at Newark Airport. Other parts of the redevelopment program are focused on increasing airfield paving, redesigning roadways and improving parking.
 
-Reducing flight delays is important to ensure a high quality of service for the airport. The Bureau of Transportation Statistics (BTS) counts flights as delayed if they depart 15 minutes or later than their scheduled time. For the airport, knowing what the primary cause for delays is can advise the airport authority as to what measures it needs to invest most in. Improving infrastructure or improving facilities to deal with poor weather conditions.
+Reducing flight delays is important to ensure a high quality of service for the airport. Flight delays are a key performance indicator for the airport. The Bureau of Transportation Statistics (BTS) counts flights as delayed if they depart 15 minutes or later than their scheduled time. For the airport authority, knowing what the primary cause for delays is can provide insight as to what measures need investing in. Improving infrastructure or improving facilities to deal with poor weather conditions.
 
-An American study on 2007 flight data estimated that delayed flights has cost the US economy a total of nearly 33 billion dollars.
+An American study on 2007 flight data estimated that delayed flights cost the US economy a total of nearly 33 billion dollars a year. Flights may be delayed due to reasons within the air carrier's control such as maintenance or issues with staffing or crew or for reasons outside the air carrier's control such as extreme weather delay, national aviation system delay. Over a third of the main cost of delay is fuel costs. With the aviation industry focusing on improving sustainability reducing unnecessary fuel use is paramount.
 
-Flights may be delayed due to reasons within the air carrier's control such as maintenance or issues with staffing or crew or for reasons outside the air carrier's control such as extreme weather delay, national aviation system delay. Over a third of the main cost of delay is fuel costs. With the aviation industry focusing on improving sustainability reducing unnecessary fuel use is paramount.
-
-Optimizing processes and efficiently using resources are key to reducing flight delays and airlines and airports are using data analytics to improve on-time performance.
+Optimizing processes and efficiently using resources are key to reducing flight delays.  Airlines and airports are using data analytics to improve on-time performance.
 
 sources: 
 [Bureau of Transportation Statistics (BTC)](https://www.bts.gov/topics/airlines-and-airports/understanding-reporting-causes-flight-delays-and-cancellations)
 [](https://centreforaviation.com/analysis/reports/the-cost-of-delays-late-flights-cost-us-economy-usd33-billion-39215)
 [Port Authority](https://www.panynj.gov/airports/en/index.html)
+
+<br />
 
 ## Data
 
@@ -75,35 +73,54 @@ numeric (discrete) - `seats`, `engines` (number of engines)
 
 #### Data formats
 
-What format did your data come in? E.g. all downloaded flat files (CSV) or any data from APIs, scraping etc.
+The data was all in downloaded flat files (csv) or flat files received from the organisation.
 
 #### Data quality and bias
 
-Briefly describe the quality of the data and whether you have any reasons to suggest the data is biased e.g. only data from a specific demographic even though a broader demographic would be of interest to the organisation.
+The data consists of every flight per day for the year of 2017 departing from three New York airports, it also consists of weather data obtained for the three airports for the same time period.
+
+In general the data quality for the flights data was good, there was only missing information for some destination airports. The data provided on weather had a large amount of missing values for temperature measurements. The data that was externally sourced only provided information per day and not per hour. This could have biased the data as the flight informationw as per hour.
+
+Destination information was only provided for US domestic airports, this may bias the analysis. It may be relevant to the organisation to include all destination airports for the purposes of this analysis.
+
+<br />
 
 ## Ethics
 
 #### Ethical issues in data sourcing and extraction
 
-Do you have any ethical concerns regarding the sourcing and extraction of your data? 
+There are no ethical concerns with the data sourcing. All information was openly and freely available. There are no identifying variables in the data provided by the airport, however I would ensure that this data was kept private if the airport requested this.
 
 #### Ethical implications of business requirements
 
-Are there any ethical implications of the business requirements?
+The data should be communicated back to airport passengers and airline carriers. Predicting flight delays will allow the airport to provide better services for their passengers. There was no passenger information provided in the data used for this analysis. however, should future analyses expand the analysis to include passenger data then this information should be protected.
+
+<br />
 
 ## Analysis
 
 #### Stages in the data analysis process
 
-What were the main stages in your data analysis process?
+1. Planning 
+2. Data collection for missing weather data
+3. Setting up a GitHub project repository
+4. Cleaning the data
+6. Data wrangling
+7. Exploratory data analysis
+8. Creating basic visualisations and graph selection
+9. Model building and refinement
+10. Documenting the analysis 
+11. Presenting business insights
 
 #### Tools for data analysis
 
-What were the main tools you used for your analysis?
+Data analysis tools used:
+Python, Jupyter Notebooks and Visual Studio Code.
+
+Project planning tools used:
+Trello, Excalidraw (star diagram for joining datasets, timeline)
 
 #### Descriptive, diagnostic, predictive and prescriptive analysis
-
-Please report under which of the below categories your analysis falls **and why** (can be more than one) 
 
 ::: {.emphasis}
 **Descriptive Analytics** tells you what happened in the past.
@@ -115,6 +132,13 @@ Please report under which of the below categories your analysis falls **and why*
 **Prescriptive Analytics** recommends actions you can take to affect those outcomes.
 :::
 
+The analysis performed for Newark Airport investigating departure delays focused on Descriptive Analytics, Diagnostic Analytics and Prescriptive analytics.
+
+The initial exploratory data analysis was very descriptive, falling under Descriptive Analytics. This analysis focused on examining different variables and using data visualisations to see how flight delays changed with each different variable.
+
+The modelling was both Diagnostic and Prescriptive. This analysis focused on finding explanatory variables for departure delays which had happened in 2017 which is Diagnostic Analysis. Using the results from the model, I was able to communicate back to the business the required actions to take. This is Prescriptive Analytics. The recommended actions to take were additional investigation into other factors involved in departure delay.
+
+<br />
 
 # PDA Outcomes
 
