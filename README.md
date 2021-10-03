@@ -6,7 +6,8 @@ For this project, the project brief was written for the "client" Newark Liberty 
 
 The following approach was taken:
 
-- Clean data and source additional data (pandas)
+- Source additional weather data
+- Clean data (pandas)
 - Exploratory data analysis (seaborn, matplotlib, folium, geopandas)
 - Model departure delay (Random Forest classifier, scikit learn)
 - Deliver business insights
