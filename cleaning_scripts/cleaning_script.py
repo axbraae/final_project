@@ -38,7 +38,7 @@ airports_clean['timezone'] = airports_clean.apply(
 # import weather data --------------------------------------------
 weather = pd.read_csv('../data/raw_data/weather.csv')
 
-# import additional weather data 
+# import additional weather data
 extra_weather = pd.read_csv('../data/raw_data/extra_weather.csv')
 extra_weather.drop(columns = ['hdd', 'ccd'], inplace = True)
 
@@ -67,10 +67,10 @@ weather.drop(columns = ['day_str', 'month_str'], inplace = True)
 # note: weather is missing all data for dec 31st
 
 weather_merge = pd.merge(
-    left = weather, 
-    right = extra_weather, 
-    left_on = ['join_id'], 
-    right_on = ['join_id'], 
+    left = weather,
+    right = extra_weather,
+    left_on = ['join_id'],
+    right_on = ['join_id'],
     how = 'left')
 
 # impute missing values in weather
@@ -90,13 +90,13 @@ weather_merge.fillna({'wind_gust': np.round(
 # remove columns not needed
 weather_clean = weather_merge.copy()
 weather_clean.drop(columns = [
-    'temp', 
-    'dewp', 
-    'humid', 
-    'precip', 
-    'pressure', 
-    'year', 
-    'join_id'], 
+    'temp',
+    'dewp',
+    'humid',
+    'precip',
+    'pressure',
+    'year',
+    'join_id'],
     inplace = True)
 
 # import planes data ---------------------------------------------------
@@ -148,18 +148,18 @@ airports_clean_ori = airports_clean.add_prefix('ori_').copy()
 airports_clean_dest = airports_clean.add_prefix('dest_').copy()
 
 flights_airports_ori = pd.merge(
-    left = flights_weather, 
-    right = airports_clean_ori, 
-    left_on = ['origin'], 
-    right_on = ['ori_faa'], 
+    left = flights_weather,
+    right = airports_clean_ori,
+    left_on = ['origin'],
+    right_on = ['ori_faa'],
     how = 'left')
 
 
 flights_airports_weather = pd.merge(
-    left = flights_airports_ori, 
-    right = airports_clean_dest, 
-    left_on = ['dest'], 
-    right_on = ['dest_faa'], 
+    left = flights_airports_ori,
+    right = airports_clean_dest,
+    left_on = ['dest'],
+    right_on = ['dest_faa'],
     how = 'left')
 
 # make flights_airports_weather_airlines
@@ -174,8 +174,8 @@ flights_airports_weather_airlines_planes = pd.merge(left = flights_airports_weat
 # replace NaNs in plane data
 na_replace = {
        'type': 'Unknown',
-       'manufacturer': 'Unknown', 
-       'model': 'Unknown', 
+       'manufacturer': 'Unknown',
+       'model': 'Unknown',
        'engine': 'Unknown'}
 
 flights_airports_weather_airlines_planes.fillna(value=na_replace, inplace=True)
@@ -188,7 +188,7 @@ ewr_flights = flights_airports_weather_airlines_planes.loc[
 
 jfk_flights = flights_airports_weather_airlines_planes.loc[
     (flights_airports_weather_airlines_planes['origin'] == 'JFK')].copy().reset_index(drop=True)
-    
+
 lga_flights = flights_airports_weather_airlines_planes.loc[
     (flights_airports_weather_airlines_planes['origin'] == 'LGA')].copy().reset_index(drop=True)
 
